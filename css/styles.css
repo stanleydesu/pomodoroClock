@@ -18,6 +18,18 @@ body {
 	height: 80vh;
 }
 
+.wrapper {
+	display: flex;
+	justify-content: space-around;
+	width: 50%;
+	margin: auto;
+}
+
+.type {
+	text-align: center;
+	margin-bottom: .5em;
+}
+
 #adjusters {
 	display: flex;
 	justify-content: space-between;
@@ -26,6 +38,7 @@ body {
 #break, #session {
 	width: 40%;
 	border: 2px solid white;
+	padding: .5em;
 }
 
 #break:before, #session:before {
@@ -35,9 +48,7 @@ body {
 	border: 5px solid white;
 }
 
-.type {
 
-}
 
 #break {
 	
