@@ -35,7 +35,7 @@ body {
 	justify-content: space-between;
 }
 
-#break, #session {
+#break, #session, #time {
 	width: 40%;
 	border: 2px solid white;
 	padding: .5em;
@@ -53,3 +53,11 @@ body {
 #break {
 	
 }
+
+#time {
+	margin: auto;
+	margin-top: 1em;
+	text-align: center;
+}
+
+
