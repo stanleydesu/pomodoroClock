@@ -27,6 +27,18 @@
 		} else if (id === 'plusBreak') {
 			++breakValue.textContent;
 		}
-	})
+	});
+
+	sessionDiv.addEventListener('click', function(e) {
+		let target = e.target,
+			id = target.id;
+
+		// alter break length depending on button clicked
+		if (id === 'minusSession') {
+			--sessionValue.textContent;
+		} else if (id === 'plusSession') {
+			++sessionValue.textContent;
+		}
+	});
 })();
 
