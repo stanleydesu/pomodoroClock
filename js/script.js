@@ -9,10 +9,16 @@
 		  timeDiv = document.getElementById('time'),
 		  animationDiv = document.getElementById('animation');
 
-	let timeInSeconds = sessionValue.textContent * 60,
+	let timeInSeconds,
 		timerId,
 		isTiming;
+
 	// functions
+
+	function setTime() {
+		timeInSeconds = sessionValue.textContent * 60;
+		displayTime();
+	}
 
 	function startTime() {
 		isTiming = true;
@@ -30,7 +36,7 @@
 	function displayTime() {
 		let minutes = Math.floor(timeInSeconds / 60);
 		let seconds = timeInSeconds % 60;
-		timeDiv.textContent = '' + minutes + ':' + seconds;
+		timeDiv.textContent = '' + minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
 	}
 
 	// event listeners
@@ -59,7 +65,7 @@
 			++sessionValue.textContent;
 		}
 
-		timeInSeconds = +sessionDiv.textContent * 60;
+		setTime();
 	});
 
 	timeDiv.addEventListener('click', function() {
@@ -69,5 +75,7 @@
 			startTime();
 		}
 	});
+
+	setTime();
 })();
 
