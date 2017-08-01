@@ -15,9 +15,8 @@
 			break: 300, // break length, default of 5 minutes
 			time: undefined, // current time length
 			timer: undefined, // id of setInterval loop
-			current: undefined, // whichever of session or break is activated
-			next: undefined, // whichever of session or break should be timed next
-			isTiming: undefined // boolean of timing status
+			current: 'session', // whichever of session or break is activated
+			isTiming: false // boolean of timing status
 		};
 		this.setSession = function(length) {
 			this.settings.session = length;
@@ -26,14 +25,12 @@
 			this.settings.break = length;
 		};
 		this.play = function() {
-			this.settings.isTiming = true;
+			settings.isTiming = true;
 			settings.timer = setInterval(function() {
 				--settings[settings.current];
 				// if time is up, change to session or break accordingly
 				if (settings[settings.current] === 0) {
-					let temp = settings.current;
-					settings.current = settings.next;
-					settings.next = temp;
+					this.toggleMode();
 				}
 			}, 1000);
 		};
@@ -41,23 +38,37 @@
 			settings.isTiming = false;
 			clearInterval(settings.timer);
 		};
+		this.getTime = function() {
+			return settings.time;
+		}
+		// change between play and pause
 		this.toggleTiming = function() {
 			if (settings.isTiming) {
-				this.play();
+				this.pause();
+				settings.isTiming = false;
 			} else {
-				this.start();
+				this.play();
+				settings.isTiming = true;
 			}
-		}
+		};
+		// change between session and break
+		this.toggleMode = function() {
+			if (settings.current === 'session') {
+				settings.current = 'break';
+			} else {
+				settings.current = 'session';
+			}
+			// set time to length of current mode
+			settings.time = settings[settings.current];
+		};
 		this.init = function() {
-			console.log(settings);
-			settings.current = 'session';
-			settings.next = 'next';
+			settings.time = settings.session;
 		};
 	}
 
 	function displayTime(pomodoro) {
 		setInterval(function() {
-			let time = pomodoro.settings.time,
+			let time = pomodoro.getTime(),
 				minutes = Math.floor(time / 60),
 				seconds = time % 60;
 			timeDiv.textContent = '' + minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
@@ -80,6 +91,7 @@
 		}
 	});
 
+	// adjust session length
 	sessionDiv.addEventListener('click', function(e) {
 		let target = e.target,
 			id = target.id;
@@ -90,8 +102,11 @@
 		}
 	});
 
+	// alternate between timing and paused
 	timeDiv.addEventListener('click', function() {
-		pomoro.toggleTiming();
+		pomodoro.toggleTiming();
 	});
+
+	displayTime(pomodoro);
 })();
 
