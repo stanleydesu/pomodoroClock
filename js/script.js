@@ -15,14 +15,20 @@
 			break: 300, // break length, default of 5 minutes
 			time: undefined, // current time length
 			timer: undefined, // id of setInterval loop
-			current: 'session', // whichever of session or break is activated
-			isTiming: false // boolean of timing status
+			current: 'session', // the current mode (either session or break)
+			isTiming: false // whether or not pomodoro is activated
 		};
 		this.setSession = function(length) {
 			settings.session = length;
+			if (settings.isTiming === false && settings.current === 'session') {
+				settings.time = settings.session;
+			}
 		};
 		this.setBreak = function(length) {
 			settings.break = length;
+			if (settings.isTiming === false && settings.current === 'break') {
+				settings.time = settings.break;
+			}
 		};
 		this.play = function() {
 			settings.isTiming = true;
@@ -72,7 +78,7 @@
 				minutes = Math.floor(time / 60),
 				seconds = time % 60;
 			timeDiv.textContent = '' + minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
-		}, 1000);
+		}, 100);
 	}
 
 	let pomodoro = new Pomodoro();
@@ -86,9 +92,12 @@
 			id = target.id;
 
 		// update break length if adjuster was clicked
-		if (id === 'minusBreak' || id === 'plusBreak') {
-			pomodoro.setBreak(breakValue.textContent * 60);
+		if (id === 'minusBreak') {
+			breakValue.textContent = --breakValue.textContent;
+		} else if (id === 'plusBreak') {
+			breakValue.textContent = ++breakValue.textContent;
 		}
+		pomodoro.setSession(breakValue.textContent * 60);
 	});
 
 	// adjust session length
@@ -97,9 +106,12 @@
 			id = target.id;
 
 		// update session length if adjuster was clicked
-		if (id === 'minusSession' || id === 'plusSession') {
-			pomodoro.setSession(sessionValue.textContent * 60);
+		if (id === 'minusSession') {
+			sessionValue.textContent = --sessionValue.textContent;
+		} else if (id === 'plusSession') {
+			sessionValue.textContent = ++sessionValue.textContent;
 		}
+		pomodoro.setSession(sessionValue.textContent * 60);
 	});
 
 	// alternate between timing and paused
