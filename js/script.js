@@ -19,17 +19,17 @@
 			isTiming: false // boolean of timing status
 		};
 		this.setSession = function(length) {
-			this.settings.session = length;
+			settings.session = length;
 		};
 		this.setBreak = function(length) {
-			this.settings.break = length;
+			settings.break = length;
 		};
 		this.play = function() {
 			settings.isTiming = true;
 			settings.timer = setInterval(function() {
-				--settings[settings.current];
+				--settings.time;
 				// if time is up, change to session or break accordingly
-				if (settings[settings.current] === 0) {
+				if (settings.time === 0) {
 					this.toggleMode();
 				}
 			}, 1000);
