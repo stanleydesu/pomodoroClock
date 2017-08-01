@@ -78,7 +78,7 @@
 				minutes = Math.floor(time / 60),
 				seconds = time % 60;
 			timeDiv.textContent = '' + minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
-		}, 100);
+		}, 50);
 	}
 
 	let pomodoro = new Pomodoro();
