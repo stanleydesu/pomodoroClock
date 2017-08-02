@@ -20,12 +20,14 @@
 		};
 		this.setSession = function(length) {
 			settings.session = length;
+			// reset time if currently paused
 			if (settings.isTiming === false && settings.current === 'session') {
 				settings.time = settings.session;
 			}
 		};
 		this.setBreak = function(length) {
 			settings.break = length;
+			// reset time if currently paused
 			if (settings.isTiming === false && settings.current === 'break') {
 				settings.time = settings.break;
 			}
@@ -67,9 +69,6 @@
 			// set time to length of current mode
 			settings.time = settings[settings.current];
 		};
-		this.init = function() {
-			settings.time = settings.session;
-		};
 	}
 
 	function displayTime(pomodoro) {
@@ -82,7 +81,8 @@
 	}
 
 	let pomodoro = new Pomodoro();
-	pomodoro.init();
+	pomodoro.setSession(sessionValue.textContent * 60);
+	pomodoro.setBreak(breakValue.textContent * 60);
 
 	// event listeners
 
@@ -97,7 +97,7 @@
 		} else if (id === 'plusBreak') {
 			breakValue.textContent = ++breakValue.textContent;
 		}
-		pomodoro.setSession(breakValue.textContent * 60);
+		pomodoro.setBreak(breakValue.textContent * 60);
 	});
 
 	// adjust session length
