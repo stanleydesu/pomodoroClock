@@ -93,9 +93,12 @@
 
 		// update break length if adjuster was clicked
 		if (id === 'minusBreak') {
-			breakValue.textContent = --breakValue.textContent;
+			// prevent negative values
+			if (+breakValue.textContent > 1) {
+				--breakValue.textContent;
+			}
 		} else if (id === 'plusBreak') {
-			breakValue.textContent = ++breakValue.textContent;
+			++breakValue.textContent;
 		}
 		pomodoro.setBreak(breakValue.textContent * 60);
 	});
@@ -107,9 +110,12 @@
 
 		// update session length if adjuster was clicked
 		if (id === 'minusSession') {
-			sessionValue.textContent = --sessionValue.textContent;
+			// prevent negative values
+			if (+sessionValue.textContent > 1) {
+				--sessionValue.textContent;
+			}
 		} else if (id === 'plusSession') {
-			sessionValue.textContent = ++sessionValue.textContent;
+			++sessionValue.textContent;
 		}
 		pomodoro.setSession(sessionValue.textContent * 60);
 	});
