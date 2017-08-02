@@ -32,23 +32,6 @@
 				settings.time = settings.break;
 			}
 		};
-		this.play = function() {
-			settings.isTiming = true;
-			settings.timer = setInterval(function() {
-				--settings.time;
-				// if time is up, change to session or break accordingly
-				if (settings.time === 0) {
-					this.toggleMode();
-				}
-			}, 1000);
-		};
-		this.pause = function() {
-			settings.isTiming = false;
-			clearInterval(settings.timer);
-		};
-		this.getTime = function() {
-			return settings.time;
-		}
 		// change between play and pause
 		this.toggleTiming = function() {
 			if (settings.isTiming) {
@@ -68,6 +51,24 @@
 			}
 			// set time to length of current mode
 			settings.time = settings[settings.current];
+		};
+		this.play = function() {
+			let that = this; // save reference to this, so toggleMode is called from this instead of window
+			settings.isTiming = true;
+			settings.timer = setInterval(function() {
+				--settings.time;
+				// if time is up, change to session or break accordingly
+				if (settings.time === 0) {
+					that.toggleMode();
+				}
+			}, 1000);
+		};
+		this.pause = function() {
+			settings.isTiming = false;
+			clearInterval(settings.timer);
+		};
+		this.getTime = function() {
+			return settings.time;
 		};
 	}
 
