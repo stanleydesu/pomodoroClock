@@ -44,16 +44,13 @@
 		};
 		// change between session and break
 		this.toggleMode = function() {
-			if (settings.current === 'session') {
-				settings.current = 'break';
-			} else {
-				settings.current = 'session';
-			}
+			settings.current = (settings.current === 'session') ? 'break' : 'session';
 			// set time to length of current mode
 			settings.time = settings[settings.current];
 		};
 		this.play = function() {
-			let that = this; // save reference to this, so toggleMode is called from this instead of window
+			// save reference to this, so toggleMode is called from this instead of window
+			let that = this;
 			settings.isTiming = true;
 			settings.timer = setInterval(function() {
 				--settings.time;
@@ -77,7 +74,7 @@
 			let time = pomodoro.getTime(),
 				minutes = Math.floor(time / 60),
 				seconds = time % 60;
-			timeDiv.textContent = '' + minutes + ':' + (seconds < 10 ? '0' + seconds : seconds);
+			timeDiv.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 		}, 50);
 	}
 
