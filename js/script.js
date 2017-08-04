@@ -72,7 +72,7 @@
 		};
 		this.getMode = function() {
 			return settings.mode;
-		}
+		};
 	}
 
 	function displayTime(pomodoro) {
@@ -95,7 +95,7 @@
 		let target = e.target,
 			id = target.id;
 
-		if (!pomodoro.getTimingStatus() && pomodoro.getMode() === 'current') {
+		if (!pomodoro.getTimingStatus() || pomodoro.getMode() === 'session') {
 			// update break length if adjuster was clicked
 			if (id === 'minusBreak') {
 				// prevent negative values
@@ -114,8 +114,7 @@
 		let target = e.target,
 			id = target.id;
 
-		if (!pomodoro.getTimingStatus() && pomodoro.getMode() === 'break') {
-			// update session length if adjuster was clicked
+		if (!pomodoro.getTimingStatus() || pomodoro.getMode() === 'break') {
 			if (id === 'minusSession') {
 				// prevent negative values
 				if (+sessionValue.textContent > 1) {
