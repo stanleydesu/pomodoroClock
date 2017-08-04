@@ -18,6 +18,10 @@ body {
 	height: 80vh;
 }
 
+.main-wrapper > div {
+	padding: 1em 0 1em 0;
+}
+
 .wrapper {
 	display: flex;
 	justify-content: space-around;
@@ -37,13 +41,12 @@ body {
 
 #break, #session, #time {
 	width: 40%;
-	padding: .5em;
+	padding: .5em 0 .5em 0;
 	position: relative;
 }
 
 #time {
 	margin: auto;
-	margin-top: 1em;
 	text-align: center;
 }
 
