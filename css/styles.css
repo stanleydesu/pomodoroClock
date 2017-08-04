@@ -37,21 +37,8 @@ body {
 
 #break, #session, #time {
 	width: 40%;
-	border: 2px solid white;
 	padding: .5em;
-}
-
-#break:before, #session:before {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	border: 5px solid white;
-}
-
-
-
-#break {
-	
+	position: relative;
 }
 
 #time {
@@ -60,4 +47,24 @@ body {
 	text-align: center;
 }
 
+#break:before, #session:before, #time:before, 
+#break:after, #session:after, #time:after {
+	content: '';
+	position: absolute;
+	width: 1em;
+	height: 1em;
+}
 
+#break:before, #session:before, #time:before {
+	left: 0;
+	top: 0;
+	border-top: 2px solid white;
+	border-left: 2px solid white;
+}
+
+#break:after, #session:after, #time:after {
+	bottom: 0;
+	right: 0;
+	border-bottom: 2px solid white;
+	border-right: 2px solid white;
+}
