@@ -3,6 +3,7 @@
 	--font: #fff;
 	--red: #e74c3c;
 	--green: #2ecc71;
+	--blue: #3498db;
 }
 
 body {
@@ -53,6 +54,12 @@ body {
 	position: relative;
 }
 
+
+#break:hover:before, #session:hover:before, #time-display:hover:before, 
+#break:hover:after, #session:hover:after, #time-display:hover:after {
+	border-color: var(--blue);
+}
+
 #minusBreak, #plusBreak, #minusSession, #plusSession {
 	font-size: 2em;
 	cursor: pointer;
@@ -83,6 +90,7 @@ body {
 	position: absolute;
 	width: 1em;
 	height: 1em;
+	transition: border-color .3s ease;
 }
 
 #break:before, #session:before, #time-display:before {
