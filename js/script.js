@@ -6,7 +6,7 @@
 		  sessionDiv = document.getElementById('session'),
 		  breakValue = document.getElementById('breakValue'),
 		  sessionValue = document.getElementById('sessionValue'),
-		  timeDiv = document.getElementById('time'),
+		  timeDiv = document.getElementById('time-display'),
 		  animationDiv = document.getElementById('animation');
 
 	function Pomodoro() {
