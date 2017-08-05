@@ -1,6 +1,8 @@
 :root {
 	--dark: #222;
 	--font: #fff;
+	--red: #e74c3c;
+	--green: #2ecc71;
 }
 
 body {
@@ -31,41 +33,60 @@ body {
 
 .type {
 	text-align: center;
-	margin-bottom: .5em;
+	margin: .5em 1em;
 }
 
 #adjusters {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
-#break, #session, #time {
-	width: 40%;
-	padding: .5em 0 .5em 0;
+#break, #session, #time-display {
+	width: 15em;
+	padding: .5em 0 .5em;
 	position: relative;
 }
 
-#time {
+#minusBreak, #plusBreak, #minusSession, #plusSession {
+	font-size: 2em;
+	cursor: pointer;
+}
+
+#minusBreak:hover, #minusSession:hover{
+	color: var(--red);
+}
+
+#plusBreak:hover, #plusSession:hover {
+	color: var(--green);
+}
+
+#breakValue, #sessionValue {
+	display: flex;
+	align-items: center;
+}
+
+#time-display {
+	width: 10em;
 	margin: auto;
 	text-align: center;
 }
 
-#break:before, #session:before, #time:before, 
-#break:after, #session:after, #time:after {
+#break:before, #session:before, #time-display:before, 
+#break:after, #session:after, #time-display:after {
 	content: '';
 	position: absolute;
 	width: 1em;
 	height: 1em;
 }
 
-#break:before, #session:before, #time:before {
+#break:before, #session:before, #time-display:before {
 	left: 0;
 	top: 0;
 	border-top: 2px solid white;
 	border-left: 2px solid white;
 }
 
-#break:after, #session:after, #time:after {
+#break:after, #session:after, #time-display:after {
 	bottom: 0;
 	right: 0;
 	border-bottom: 2px solid white;
