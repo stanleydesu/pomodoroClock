@@ -7,6 +7,7 @@
 		  breakValue = document.getElementById('breakValue'),
 		  sessionValue = document.getElementById('sessionValue'),
 		  timeDiv = document.getElementById('time-display'),
+		  timeValue = document.getElementById('time'),
 		  animationDiv = document.getElementById('animation');
 
 	function Pomodoro() {
@@ -80,7 +81,7 @@
 			let time = pomodoro.getTime(),
 				minutes = Math.floor(time / 60),
 				seconds = time % 60;
-			timeDiv.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+			timeValue.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 		}, 50);
 	}
 
