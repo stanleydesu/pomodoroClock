@@ -1,14 +1,14 @@
 :root {
 	--dark: #222;
-	--font: #fff;
 	--red: #e74c3c;
 	--green: #2ecc71;
 	--blue: #3498db;
+	--default: #fff;
 }
 
 body {
 	background-color: var(--dark);
-	color: var(--font);
+	color: var(--default);
 }
 
 .main-wrapper {
@@ -60,11 +60,14 @@ body {
 	width: 15em;
 	padding: .5em 0 .5em;
 	position: relative;
+	transition: color .3s ease;
 }
 
 #break:hover:before, #session:hover:before, #time-display:hover:before, 
-#break:hover:after, #session:hover:after, #time-display:hover:after {
+#break:hover:after, #session:hover:after, #time-display:hover:after,
+#break:hover, #session:hover, #time-display:hover {
 	border-color: var(--blue);
+	color: var(--blue);
 }
 
 #minusBreak, #plusBreak, #minusSession, #plusSession {
@@ -104,15 +107,15 @@ body {
 #break:before, #session:before, #time-display:before {
 	left: 0;
 	top: 0;
-	border-top: 1px solid white;
-	border-left: 1px solid white;
+	border-top: 1px solid var(--default);
+	border-left: 1px solid var(--default);
 }
 
 #break:after, #session:after, #time-display:after {
 	bottom: 0;
 	right: 0;
-	border-bottom: 1px solid white;
-	border-right: 1px solid white;
+	border-bottom: 1px solid var(--default);
+	border-right: 1px solid var(--default);
 }
 
 #animation {
