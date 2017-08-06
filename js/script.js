@@ -7,6 +7,7 @@
 		  breakValue = document.getElementById('breakValue'),
 		  sessionValue = document.getElementById('sessionValue'),
 		  timeDiv = document.getElementById('time-display'),
+		  modeValue = document.getElementById('modeValue'),
 		  timeValue = document.getElementById('time'),
 		  animationDiv = document.getElementById('animation');
 
@@ -80,7 +81,9 @@
 		setInterval(function() {
 			let time = pomodoro.getTime(),
 				minutes = Math.floor(time / 60),
-				seconds = time % 60;
+				seconds = time % 60,
+				mode = pomodoro.getMode();
+			modeValue.textContent = mode.toUpperCase();
 			timeValue.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 		}, 50);
 	}
@@ -134,5 +137,8 @@
 	});
 
 	displayTime(pomodoro);
+
+	
+
 })();
 
