@@ -3,8 +3,8 @@
 	--light: #555;
 	--red: #e74c3c;
 	--green: #2ecc71;
-	--sky: #87CEEB;
 	--blue: #3498db;
+	--sky: #87CEEB;
 	--hover: #e67e22;
 	--default: #fff;
 }
@@ -16,6 +16,7 @@ html {
 body {
 	background: #222;
 	height: 100%;
+	margin: 0;
 	color: var(--default);
 }
 
@@ -35,21 +36,18 @@ body {
 	user-select: none;
 	font-weight: 200;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
 	flex-direction: column;
-	flex-wrap: nowrap;
-	align-items: flex-start;
+	overflow: hidden;
 }
 
 @media screen and (max-width: 600px) {
+	* {
+		font-size: 14px;
+	}
 	.main-wrapper {
 		width: 95vw;
 		height: 100vh;
-		font-size: 14px;
-	}
-
-	.main-wrapper #adjusters {
-		width: 100%;
 	}
 
 	.main-wrapper #break, .main-wrapper #session, .main-wrapper #time-display {
@@ -57,7 +55,7 @@ body {
 	}
 }
 
-.main-wrapper > div {
+.information > div {
 	padding: 1em 0 1em 0;
 }
 
@@ -71,13 +69,14 @@ body {
 .type {
 	text-align: center;
 	margin: .5em .5em;
+	transition: color .3s ease;
 }
 
 #adjusters {
 	display: flex;
 	justify-content: space-between;
 	margin: auto;
-	width: 80%;
+	width: 100%;
 }
 
 #break, #session, #time-display {
@@ -89,9 +88,32 @@ body {
 
 #break:hover:before, #session:hover:before, #time-display:hover:before, 
 #break:hover:after, #session:hover:after, #time-display:hover:after,
-#break:hover, #session:hover, #time-display:hover {
+#break:hover .type, #session:hover .type, #time-display:hover .type {
 	border-color: var(--hover);
 	color: var(--hover);
+}
+
+#break:before, #session:before, #time-display:before, 
+#break:after, #session:after, #time-display:after {
+	content: '';
+	position: absolute;
+	width: 1em;
+	height: 1em;
+	transition: border-color .3s ease;
+}
+
+#break:before, #session:before, #time-display:before {
+	left: 0;
+	top: 0;
+	border-top: 2px solid var(--default);
+	border-left: 2px solid var(--default);
+}
+
+#break:after, #session:after, #time-display:after {
+	bottom: 0;
+	right: 0;
+	border-bottom: 2px solid var(--default);
+	border-right: 2px solid var(--default);
 }
 
 #minusBreak, #plusBreak, #minusSession, #plusSession {
@@ -119,33 +141,14 @@ body {
 	cursor: pointer;
 }
 
-#break:before, #session:before, #time-display:before, 
-#break:after, #session:after, #time-display:after {
-	content: '';
-	position: absolute;
-	width: 1em;
-	height: 1em;
-	transition: border-color .3s ease;
-}
-
-#break:before, #session:before, #time-display:before {
-	left: 0;
-	top: 0;
-	border-top: 2px solid var(--default);
-	border-left: 2px solid var(--default);
-}
-
-#break:after, #session:after, #time-display:after {
-	bottom: 0;
-	right: 0;
-	border-bottom: 2px solid var(--default);
-	border-right: 2px solid var(--default);
+#time {
+	font-size: 20px;
 }
 
 #animation {
-	flex-grow: 1;
+	flex: 1;
+	bottom: 0;
 	width: 100%;
-	overflow: hidden;
 }
 
 #canvas {
