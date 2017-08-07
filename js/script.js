@@ -9,7 +9,11 @@
 		  timeDiv = document.getElementById('time-display'),
 		  modeValue = document.getElementById('modeValue'),
 		  timeValue = document.getElementById('time'),
-		  animationDiv = document.getElementById('animation');
+		  animationDiv = document.getElementById('animation'),
+		  canvas = document.getElementById('canvas');
+
+	canvas.width = canvas.offsetWidth;
+	canvas.height = canvas.offsetHeight;
 
 	function Pomodoro() {
 		const settings = {
@@ -77,7 +81,8 @@
 		};
 	}
 
-	function displayTime(pomodoro) {
+	function animate(pomodoro) {
+		// animate time
 		setInterval(function() {
 			let time = pomodoro.getTime(),
 				minutes = Math.floor(time / 60),
@@ -100,7 +105,6 @@
 			id = target.id;
 
 		if (!pomodoro.getTimingStatus() || pomodoro.getMode() === 'session') {
-			// update break length if adjuster was clicked
 			if (id === 'minusBreak') {
 				// prevent negative values
 				if (+breakValue.textContent > 1) {
@@ -136,9 +140,5 @@
 		pomodoro.toggleTiming();
 	});
 
-	displayTime(pomodoro);
-
-	
-
+	animate(pomodoro);
 })();
-
