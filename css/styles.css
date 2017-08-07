@@ -1,13 +1,21 @@
 :root {
 	--dark: #222;
+	--light: #555;
 	--red: #e74c3c;
 	--green: #2ecc71;
+	--sky: #87CEEB;
 	--blue: #3498db;
+	--hover: #e67e22;
 	--default: #fff;
 }
 
+html {
+	margin: 0;
+}
+
 body {
-	background-color: var(--dark);
+	background: #222;
+	height: 100%;
 	color: var(--default);
 }
 
@@ -16,7 +24,7 @@ body {
 	left: 50%;
 	position: absolute;
 	transform: translate(-50%, -50%);
-	font-family: "Helvetica Neue";
+	font-family: "Helvetica Neue", sans-serif;
 	width: 80vw;
 	height: 95vh;
 	-webkit-touch-callout: none;
@@ -33,25 +41,41 @@ body {
 	align-items: flex-start;
 }
 
+@media screen and (max-width: 600px) {
+	.main-wrapper {
+		width: 95vw;
+		height: 100vh;
+		font-size: 14px;
+	}
+
+	.main-wrapper #adjusters {
+		width: 100%;
+	}
+
+	.main-wrapper #break, .main-wrapper #session, .main-wrapper #time-display {
+		width: 10em;
+	}
+}
+
 .main-wrapper > div {
 	padding: 1em 0 1em 0;
 }
 
 .wrapper {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	width: 50%;
 	margin: auto;
 }
 
 .type {
 	text-align: center;
-	margin: .5em 1em;
+	margin: .5em .5em;
 }
 
 #adjusters {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	margin: auto;
 	width: 80%;
 }
@@ -66,8 +90,8 @@ body {
 #break:hover:before, #session:hover:before, #time-display:hover:before, 
 #break:hover:after, #session:hover:after, #time-display:hover:after,
 #break:hover, #session:hover, #time-display:hover {
-	border-color: var(--blue);
-	color: var(--blue);
+	border-color: var(--hover);
+	color: var(--hover);
 }
 
 #minusBreak, #plusBreak, #minusSession, #plusSession {
@@ -107,18 +131,24 @@ body {
 #break:before, #session:before, #time-display:before {
 	left: 0;
 	top: 0;
-	border-top: 1px solid var(--default);
-	border-left: 1px solid var(--default);
+	border-top: 2px solid var(--default);
+	border-left: 2px solid var(--default);
 }
 
 #break:after, #session:after, #time-display:after {
 	bottom: 0;
 	right: 0;
-	border-bottom: 1px solid var(--default);
-	border-right: 1px solid var(--default);
+	border-bottom: 2px solid var(--default);
+	border-right: 2px solid var(--default);
 }
 
 #animation {
 	flex-grow: 1;
 	width: 100%;
+	overflow: hidden;
+}
+
+#canvas {
+	width: 100%;
+	height: 100%;
 }
