@@ -9,11 +9,7 @@
 		  timeDiv = document.getElementById('time-display'),
 		  modeValue = document.getElementById('modeValue'),
 		  timeValue = document.getElementById('time'),
-		  animationDiv = document.getElementById('animation'),
-		  canvas = document.getElementById('canvas');
-
-	canvas.width = canvas.offsetWidth;
-	canvas.height = canvas.offsetHeight;
+		  animationDiv = document.getElementById('animation');
 
 	function Pomodoro() {
 		const settings = {
@@ -79,6 +75,9 @@
 		this.getMode = function() {
 			return settings.mode;
 		};
+		this.getProgress = function() {
+			return Math.floor(settings.time / settings[settings.current] * 100);
+		};
 	}
 
 	function animate(pomodoro) {
@@ -91,6 +90,8 @@
 			modeValue.textContent = mode.toUpperCase();
 			timeValue.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 		}, 50);
+		// animate volcano
+		
 	}
 
 	let pomodoro = new Pomodoro();
