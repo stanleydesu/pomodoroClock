@@ -152,9 +152,10 @@ body {
 	line-height: 0;
 }
 
-#canvas {
+svg {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	stroke: var(--default);
 }
