@@ -1,10 +1,10 @@
 :root {
-	--dark: #111;
+	--dark: #222;
 	--light: #555;
 	--red: #e74c3c;
 	--green: #2ecc71;
 	--sky: #87CEEB;
-	--hover: #3498db;
+	--hover: #ffa500;
 	--default: #fff;
 }
 
@@ -17,6 +17,11 @@ body {
 	height: 100%;
 	margin: 0;
 	color: var(--default);
+	overflow: hidden;
+}
+
+div {
+	background: transparent;
 }
 
 .main-wrapper {
@@ -26,7 +31,7 @@ body {
 	transform: translate(-50%, -50%);
 	font-family: "Helvetica Neue", sans-serif;
 	width: 80vw;
-	height: 95vh;
+	height: 80vh;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -87,13 +92,15 @@ body {
 
 #break:hover:before, #session:hover:before, #time-display:hover:before, 
 #break:hover:after, #session:hover:after, #time-display:hover:after,
+#animation:hover:before, #animation:hover:after,
 #break:hover .type, #session:hover .type, #time-display:hover .type {
 	border-color: var(--hover);
 	color: var(--hover);
 }
 
 #break:before, #session:before, #time-display:before, 
-#break:after, #session:after, #time-display:after {
+#break:after, #session:after, #time-display:after, 
+#animation:before, #animation:after {
 	content: '';
 	position: absolute;
 	width: 1em;
@@ -101,14 +108,16 @@ body {
 	transition: border-color .3s ease;
 }
 
-#break:before, #session:before, #time-display:before {
+#break:before, #session:before, #time-display:before,
+#animation:before {
 	left: 0;
 	top: 0;
 	border-top: 2px solid var(--default);
 	border-left: 2px solid var(--default);
 }
 
-#break:after, #session:after, #time-display:after {
+#break:after, #session:after, #time-display:after,
+#animation:after {
 	bottom: 0;
 	right: 0;
 	border-bottom: 2px solid var(--default);
@@ -145,17 +154,22 @@ body {
 }
 
 #animation {
-	flex: 1;
-	bottom: 0;
-	width: 100%;
 	position: relative;
-	line-height: 0;
+	bottom: 0;
+	width: 20em;
+	padding: 2em 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+canvas {
+
 }
 
 svg {
-	position: absolute;
-	top: 50%;
+	position: relative;
+	bottom: 0;
 	left: 50%;
-	transform: translate(-50%, -50%);
+	transform: translateX(-50%);
 	stroke: var(--default);
 }
