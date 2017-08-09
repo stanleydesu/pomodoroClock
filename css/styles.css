@@ -155,9 +155,9 @@ div {
 
 #animation {
 	position: relative;
-	bottom: 0;
+	bottom: 1em;
 	width: 20em;
-	padding: 2em 0;
+	padding: 1em 0;
 	left: 50%;
 	transform: translateX(-50%);
 }
