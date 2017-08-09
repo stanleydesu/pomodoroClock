@@ -1,20 +1,74 @@
 'use strict';
 const canvas = document.getElementById('canvas'),
   	  c = canvas.getContext('2d'),
-  	  particles = [];
+  	  volcano = document.getElementById('path').getBoundingClientRect();
 
-canvas.style.width = '300px';
-canvas.style.height = '380px';
-canvas.width = canvas.offsetWidth;
-canvas.height = canvas.offsetHeight;
+let particles = [];
 
-function drawVolcano() {
-	const volcano = new Path2D('M 30 340 L 70 260 L 110 260 L 130 300 L 110 260 L 90 260 L 130 180 L 170 180 L 190 220 L 180 240 L 165 240 L 160 230 L 140 230 L 135 240 L 120 240 L 110 220 L 130 180 L 170 180 L 190 220 L 220 280 L 200 280 L 180 320 L 200 280 L 220 280 L 240 280 L 270 340');
-	c.strokeStyle = 'white';
-	c.lineWidth = '5';
-	c.stroke(volcano);
+// initialise canvas dimensions
+canvas.width = innerWidth;
+canvas.height = volcano.top;
+
+window.addEventListener('resize', function() {
+	canvas.width = innerWidth;
+	particles = [];
+	init();
+}, false);
+
+const colors = [
+  "rgb(242, 193, 102)",
+  "rgb(242, 134, 39)",
+  "rgb(217, 63, 7)",
+  "rgb(140, 29, 4)",
+  "rgb(65, 15, 4)"
+];
+
+function Particle(x, y, vx, vy, color) {
+	this.x = x;
+	this.y = y;
+	this.lastX = x;
+	this.lastY = y;
+	this.vx = vx;
+	this.vy = vy;
+	this.color = color;
+	this.update = function() {
+		this.lastX = this.x;
+		this.lastY = this.y;
+		this.x += this.vx;
+		this.y += this.vy;
+		this.draw();
+	};
+	this.draw = function() {
+		c.beginPath();
+		c.moveTo(this.lastX, this.lastY);
+		c.lineTo(this.x, this.y);
+		c.strokeStyle = this.color;
+		c.lineWidth = '3';
+		c.stroke();
+	};
 }
 
-function eruptVolcano() {
+function init() {
+	for (let i = 0; i < 500; ++i) {
+		// volcano hole width: 40px
+		let x = (canvas.width / 2) - 20 + (Math.random() * (40 / 8)) * 8,
+			y = volcano.top + (Math.random() * volcano.bottom),
+			vx = 0,
+			vy = -10,
+			color = colors[Math.floor(Math.random() * colors.length)];
+		particles.push(new Particle(x, y, vx, vy, color));
+	}
+}
 
+init();
+
+function eruptVolcano() {
+	requestAnimationFrame(eruptVolcano);
+	c.clearRect(0, 0, canvas.width, canvas.height);
+	for (let i = 0; i < particles.length; ++i) {
+		particles[i].update();
+		if (particles[i].y <= 0) {
+			particles[i].y = volcano.bottom; 
+		}
+	}
 }
