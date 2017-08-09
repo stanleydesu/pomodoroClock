@@ -81,8 +81,8 @@
 	}
 
 	function animate(pomodoro) {
-		// animate time
 		setInterval(function() {
+			// animate time
 			let time = pomodoro.getTime(),
 				minutes = Math.floor(time / 60),
 				seconds = time % 60,
@@ -90,8 +90,6 @@
 			modeValue.textContent = mode.toUpperCase();
 			timeValue.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 		}, 50);
-		// animate volcano
-		
 	}
 
 	let pomodoro = new Pomodoro();
@@ -142,4 +140,5 @@
 	});
 
 	animate(pomodoro);
+	eruptVolcano();
 })();
