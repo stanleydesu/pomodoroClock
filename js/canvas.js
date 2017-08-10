@@ -3,7 +3,8 @@ const canvas = document.getElementById('canvas'),
   	  c = canvas.getContext('2d'),
   	  volcano = document.getElementById('path').getBoundingClientRect();
 
-let particles = [];
+let particles = [],
+	animationID;
 
 // initialise canvas dimensions
 canvas.width = innerWidth;
@@ -60,10 +61,8 @@ function init() {
 	}
 }
 
-init();
-
 function eruptVolcano() {
-	requestAnimationFrame(eruptVolcano);
+	animationID = requestAnimationFrame(eruptVolcano);
 	c.clearRect(0, 0, canvas.width, canvas.height);
 	for (let i = 0; i < particles.length; ++i) {
 		particles[i].update();
@@ -71,4 +70,10 @@ function eruptVolcano() {
 			particles[i].y = volcano.bottom; 
 		}
 	}
+}
+
+function stopVolcano() {
+	c.clearRect(0, 0, canvas.width, canvas.height);
+	particles = [];
+	cancelAnimationFrame(animationID);
 }
