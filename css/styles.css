@@ -173,3 +173,12 @@ svg {
 	transform: translateX(-50%);
 	stroke: var(--default);
 }
+
+@keyframes shake {
+	from {
+		left: 49%;
+	}
+	to {
+		left: 51%;
+	}
+}
