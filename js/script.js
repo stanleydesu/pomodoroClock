@@ -9,7 +9,10 @@
 		  timeDiv = document.getElementById('time-display'),
 		  modeValue = document.getElementById('modeValue'),
 		  timeValue = document.getElementById('time'),
-		  animationDiv = document.getElementById('animation');
+		  animationDiv = document.getElementById('animation'),
+		  svg = document.querySelector('svg');
+
+	let isAnimating = false;
 
 	function Pomodoro() {
 		const settings = {
@@ -89,7 +92,21 @@
 				mode = pomodoro.getMode();
 			modeValue.textContent = mode.toUpperCase();
 			timeValue.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+			// erupt volcano if break, otherwise don't animate
+			if (mode === 'break') {
+				if (!isAnimating) {
+					init();
+					eruptVolcano();
+					isAnimating = true;
+					svg.style.animation = 'shake 0.1s linear infinite';
+				}
+			} else {
+				stopVolcano();
+				isAnimating = false;
+				svg.style.animation = 'none'
+			}
 		}, 50);
+
 	}
 
 	let pomodoro = new Pomodoro();
