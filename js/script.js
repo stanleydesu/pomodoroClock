@@ -93,7 +93,8 @@
 				mode = pomodoro.getMode();
 			modeValue.textContent = mode.toUpperCase();
 			timeValue.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-			// erupt volcano if break, otherwise don't animate
+			
+			// erupt volcano if in break mode, otherwise don't animate
 			if (mode === 'break') {
 				if (!isAnimating) {
 					init();
