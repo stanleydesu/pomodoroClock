@@ -51,7 +51,7 @@ div {
 	}
 	.main-wrapper {
 		width: 95vw;
-		height: 100vh;
+		height: 90vh;
 	}
 
 	.main-wrapper #break, .main-wrapper #session, .main-wrapper #time-display {
@@ -162,16 +162,15 @@ div {
 	transform: translateX(-50%);
 }
 
-canvas {
-
-}
-
 svg {
 	position: relative;
 	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
-	stroke: var(--default);
+}
+
+#overlay {
+	transition: height 1s ease;
 }
 
 @keyframes shake {
