@@ -10,7 +10,8 @@
 		  modeValue = document.getElementById('modeValue'),
 		  timeValue = document.getElementById('time'),
 		  animationDiv = document.getElementById('animation'),
-		  svg = document.querySelector('svg');
+		  svg = document.getElementById('normalVolcano'),
+		  rectOverlay = document.getElementById('overlay');
 
 	let isAnimating = false;
 
@@ -79,7 +80,7 @@
 			return settings.mode;
 		};
 		this.getProgress = function() {
-			return Math.floor(settings.time / settings[settings.current] * 100);
+			return Math.floor((settings[settings.mode] - settings.time) / settings[settings.mode] * 100) / 100;
 		};
 	}
 
@@ -99,13 +100,19 @@
 					eruptVolcano();
 					isAnimating = true;
 					svg.style.animation = 'shake 0.1s linear infinite';
+					// make volcano filled with lava (completely orange)
+					rectOverlay.setAttribute('height', 0);
 				}
 			} else {
-				stopVolcano();
-				isAnimating = false;
-				svg.style.animation = 'none'
+				if (isAnimating) {
+					stopVolcano();
+					isAnimating = false;
+					svg.style.animation = 'none'
+				}
+				// set lava height to corresponding progress 
+				rectOverlay.setAttribute('height', 180 - (180 * pomodoro.getProgress()));
 			}
-		}, 50);
+		}, 100);
 
 	}
 
@@ -157,5 +164,4 @@
 	});
 
 	animate(pomodoro);
-	eruptVolcano();
 })();
