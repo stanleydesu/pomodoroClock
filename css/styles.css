@@ -1,8 +1,6 @@
 :root {
 	--dark: #222;
 	--light: #555;
-	--red: #e74c3c;
-	--green: #2ecc71;
 	--sky: #87CEEB;
 	--hover: #FF6600;
 	--default: #fff;
@@ -130,11 +128,11 @@ div {
 }
 
 #minusBreak:hover, #minusSession:hover{
-	color: var(--red);
+	color: var(--hover);
 }
 
 #plusBreak:hover, #plusSession:hover {
-	color: var(--green);
+	color: var(--hover);
 }
 
 #breakValue, #sessionValue {
