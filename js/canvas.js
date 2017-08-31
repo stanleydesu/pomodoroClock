@@ -32,22 +32,24 @@ function Particle(x, y, vx, vy, color) {
 	this.vx = vx;
 	this.vy = vy;
 	this.color = color;
-	this.update = function() {
-		this.lastX = this.x;
-		this.lastY = this.y;
-		this.x += this.vx;
-		this.y += this.vy;
-		this.draw();
-	};
-	this.draw = function() {
-		c.beginPath();
-		c.moveTo(this.lastX, this.lastY);
-		c.lineTo(this.x, this.y);
-		c.strokeStyle = this.color;
-		c.lineWidth = '3';
-		c.stroke();
-	};
 }
+
+Particle.prototype.update = function() {
+	this.lastX = this.x;
+	this.lastY = this.y;
+	this.x += this.vx;
+	this.y += this.vy;
+	this.draw();
+};
+
+Particle.prototype.draw = function() {
+	c.beginPath();
+	c.moveTo(this.lastX, this.lastY);
+	c.lineTo(this.x, this.y);
+	c.strokeStyle = this.color;
+	c.lineWidth = '3';
+	c.stroke();
+};
 
 function init() {
 	for (let i = 0; i < 500; ++i) {
