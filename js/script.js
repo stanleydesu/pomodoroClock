@@ -24,22 +24,22 @@
 			mode: 'session', // the current mode (either session or break)
 			isTiming: false // whether or not pomodoro is activated
 		};
-		this.setSession = function(length) {
+		this.setSession = (length) => {
 			settings.session = length;
 			// reset time if currently paused
-			if (this.getTimingStatus() === false && settings.mode === 'session') {
+			if (!this.getTimingStatus() && settings.mode === 'session') {
 				settings.time = settings.session;
 			}
 		};
-		this.setBreak = function(length) {
+		this.setBreak = (length) => {
 			settings.break = length;
 			// reset time if currently paused
-			if (this.getTimingStatus() === false && settings.mode === 'break') {
+			if (!this.getTimingStatus() && settings.mode === 'break') {
 				settings.time = settings.break;
 			}
 		};
 		// change between play and pause
-		this.toggleTiming = function() {
+		this.toggleTiming = () => {
 			if (settings.isTiming) {
 				this.pause();
 				settings.isTiming = false;
@@ -49,16 +49,16 @@
 			}
 		};
 		// change between session and break
-		this.toggleMode = function() {
+		this.toggleMode = () => {
 			settings.mode = (settings.mode === 'session') ? 'break' : 'session';
 			// set time to length of current mode
 			settings.time = settings[settings.mode];
 		};
-		this.play = function() {
+		this.play = () => {
 			// save reference to this, so toggleMode is called from this instead of window
 			let that = this;
 			settings.isTiming = true;
-			settings.timer = setInterval(function() {
+			settings.timer = setInterval(() => {
 				--settings.time;
 				// if time is up, change to session or break accordingly
 				if (settings.time === 0) {
@@ -66,20 +66,20 @@
 				}
 			}, 1000);
 		};
-		this.pause = function() {
+		this.pause = () => {
 			settings.isTiming = false;
 			clearInterval(settings.timer);
 		};
-		this.getTime = function() {
+		this.getTime = () => {
 			return settings.time;
 		};
-		this.getTimingStatus = function() {
+		this.getTimingStatus = () => {
 			return settings.isTiming;
 		};
-		this.getMode = function() {
+		this.getMode = () => {
 			return settings.mode;
 		};
-		this.getProgress = function() {
+		this.getProgress = () => {
 			return Math.floor((settings[settings.mode] - settings.time) / settings[settings.mode] * 100) / 100;
 		};
 	}
@@ -131,7 +131,7 @@
 		if (!pomodoro.getTimingStatus() || pomodoro.getMode() === 'session') {
 			if (id === 'minusBreak') {
 				// prevent negative values
-				if (+breakValue.textContent > 1) {
+				if (Number(breakValue.textContent) > 1) {
 					--breakValue.textContent;
 				}
 			} else if (id === 'plusBreak') {
@@ -149,7 +149,7 @@
 		if (!pomodoro.getTimingStatus() || pomodoro.getMode() === 'break') {
 			if (id === 'minusSession') {
 				// prevent negative values
-				if (+sessionValue.textContent > 1) {
+				if (Number(sessionValue.textContent) > 1) {
 					--sessionValue.textContent;
 				}
 			} else if (id === 'plusSession') {
